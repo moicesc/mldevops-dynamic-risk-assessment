@@ -16,8 +16,7 @@ logger = logging.getLogger(__name__)
 today = datetime.today().strftime("%Y%M%d")
 
 
-
-#############Load config.json and get input and output paths
+logger.info("Load config.json and get input and output paths.")
 with open('config.json', 'r') as f:
     config = json.load(f) 
 
@@ -47,12 +46,14 @@ def merge_multiple_dataframe() -> None:
         ingested_files.append(str(file))
 
     merged_data.drop_duplicates(inplace=True)
-    merged_data_csv = output_files_path / "merged_data.csv"
+    merged_data_csv = output_files_path / "finaldata.csv"
     merged_data.to_csv(merged_data_csv, index=False)
-    ingested_files_txt = output_files_path / "ingested_files.txt"
+    ingested_files_txt = output_files_path / "ingestedfiles.txt"
 
     with open(ingested_files_txt, "w") as txt:
         txt.write(str(ingested_files))
+    logger.info(f"Final data file saved -> {merged_data_csv}")
+    logger.info(f"Ingested files recorded in -> {ingested_files_txt}")
 
 
 if __name__ == '__main__':
