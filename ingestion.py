@@ -48,7 +48,7 @@ def merge_multiple_dataframe() -> None:
     merged_data.drop_duplicates(inplace=True)
     merged_data_csv = output_files_path / "finaldata.csv"
     merged_data.to_csv(merged_data_csv, index=False)
-    ingested_files_txt = output_files_path / "ingestedfiles.txt"
+    ingested_files_txt = output_files_path / f"{today}_ingestedfiles.txt"
 
     with open(ingested_files_txt, "w") as txt:
         txt.write(str(ingested_files))

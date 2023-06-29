@@ -34,7 +34,7 @@ def train_model() -> None:
 
     df = df.drop("corporation", axis=1)
     y = df.exited.values
-    x = df.drop("exited", axis=1)
+    X = df.drop("exited", axis=1)
 
     model_lr = LogisticRegression(
         C=1.0, class_weight=None,
@@ -46,7 +46,7 @@ def train_model() -> None:
         verbose=0, warm_start=False)
 
     logger.info("Fitting model")
-    model_lr.fit(x, y)
+    model_lr.fit(X, y)
     model_pkl = model_path / "trainedmodel.pkl"
     logger.info(f"Model Trained, will be stored in -> {model_pkl}")
     pickle.dump(model_lr, open(model_pkl, "wb"))
