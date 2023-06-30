@@ -23,7 +23,7 @@ prod_deployment_path = Path(config['prod_deployment_path'])
 
 def store_model_into_pickle():
     """
-    copy the latest pickle file, the latestscore.txt value,
+    Function to copy the latest pickle file, the latestscore.txt value,
     and the ingestfiles.txt file into the deployment directory
     """
 
