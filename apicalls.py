@@ -20,10 +20,11 @@ output_model_path = Path(config['output_model_path'])
 test_data_file = test_data_path / "testdata.csv"
 
 
-def call_api_endpoint(url: str=URL):
+def call_api_endpoint(url: str = URL):
     """
     function to call the API endpoints
     """
+
     logger.info("Calling all functions")
     response1 = requests.get(url + f"/prediction?data={str(test_data_file)}")
     response2 = requests.get(url + "/scoring")
