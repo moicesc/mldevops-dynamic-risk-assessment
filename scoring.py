@@ -48,9 +48,9 @@ def score_model(model: Path = model_file) -> float:
     y = df.exited.values
     X = df.drop("exited", axis=1)
 
-    with open(model_file, "rb") as f:
+    with open(model, "rb") as f:
         model_lr = pickle.load(f)
-    logger.info(f"Model loaded -> {model_file}")
+    logger.info(f"Model loaded -> {model}")
 
     preds = model_lr.predict(X)
     logger.info("Predictions complete")

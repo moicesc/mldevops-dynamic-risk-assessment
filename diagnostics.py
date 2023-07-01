@@ -38,17 +38,17 @@ def model_predictions(test_dataset=None) -> list:
 
     logger.info("[DIAG] Running model predictions")
     if test_dataset is None:
-        test_dataset_file = test_data_path / "testdata.csv"
-        logger.info(f"Using default test dataset -> {test_dataset_file}")
-        test_dataset = pd.read_csv(test_dataset_file)
+        test_dataset = test_data_path / "testdata.csv"
+        logger.info(f"Using default test dataset -> {test_dataset}")
+    test_df = pd.read_csv(test_dataset)
 
     model_file = production_deployment_path / "trainedmodel.pkl"
     with open(model_file, "rb") as m:
         model = pickle.load(m)
     logger.info(f"Model loaded -> {model_file}")
 
-    test_dataset = test_dataset.drop("corporation", axis=1)
-    X = test_dataset.drop("exited", axis=1)
+    test_df = test_df.drop("corporation", axis=1)
+    X = test_df.drop("exited", axis=1)
 
     predictions = model.predict(X)
     logger.info("Predictions done")
@@ -56,16 +56,22 @@ def model_predictions(test_dataset=None) -> list:
     return predictions
 
 
-def dataframe_summary() -> list:
+def dataframe_summary(dataset=None) -> list:
     """
     Function to calculate data statistics
+
+    Args:
+        dataset: dataset to calculate statistics to
     Returns:
         A list containing all summary statistics
     """
 
     logger.info("[DIAG] Getting data statistics")
-    dataset_file = dataset_csv_path / "finaldata.csv"
-    df = pd.read_csv(dataset_file)
+
+    if dataset is None:
+        dataset = dataset_csv_path / "finaldata.csv"
+        logger.info(f"Using default dataset -> {dataset}")
+    df = pd.read_csv(dataset)
 
     num_col_index = np.where(df.dtypes != object)[0]
     num_col = df.columns[num_col_index].tolist()
@@ -80,32 +86,30 @@ def dataframe_summary() -> list:
 
     stats = means + medians + std_devs
 
-    logger.info(f"Statistics calculated {stats}")
-
     return stats
 
 
-def missing_data(df=None) -> list:
+def missing_data(dataset=None) -> list:
     """
     Function to check for missing data
 
     Args:
-        df: Dataframe to check for missing data
+        dataset: Dataframe to check for missing data
     Returns:
         A list with the percent of NA values in a data column
     """
 
     logger.info("[DIAG] Getting missing data percentage")
-    if df is None:
-        df_file = dataset_csv_path / "finaldata.csv"
-        logger.info(f"Using default dataset -> {df_file}")
-        df = pd.read_csv(df_file)
+    if dataset is None:
+        dataset = dataset_csv_path / "finaldata.csv"
+        logger.info(f"Using default dataset -> {dataset}")
+    df = pd.read_csv(dataset)
 
     missing = df.isna().sum(axis=0) / len(df) * 100
 
     logger.info(f"Missing values -> {missing.values}")
 
-    return missing.values
+    return missing.values.tolist()
 
 
 def execution_time() -> list:
