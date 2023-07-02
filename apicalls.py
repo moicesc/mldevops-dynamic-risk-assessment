@@ -1,6 +1,7 @@
 """
 Module to call all API endpoints
 Author: Moises Gonzalez
+Date: 02/Jul/2023
 """
 import requests
 import json
@@ -23,6 +24,9 @@ test_data_file = test_data_path / "testdata.csv"
 def call_api_endpoint(url: str = URL):
     """
     function to call the API endpoints
+
+    Args:
+        url: url to call the endpoints to
     """
 
     logger.info("Calling all functions")
@@ -40,7 +44,7 @@ def call_api_endpoint(url: str = URL):
                 f"\ndiagnostics status_code-> {response4.status_code}\n" \
                 f"{response4.content.decode('utf-8')}"
 
-    api_returns = output_model_path / "apireturns.txt"
+    api_returns = output_model_path / "apireturns1.txt"
     with open(api_returns, "w") as txt:
         txt.write(responses)
     logger.info(f"API responses saved to -> {api_returns}")

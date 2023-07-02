@@ -49,7 +49,7 @@ def score_model() -> None:
     ax.set_ylabel("True label")
     ax.xaxis.set_ticklabels(["0", "1"])
     ax.yaxis.set_ticklabels(["0", "1"])
-    confusion_matrix_img = output_model_path / "confusion_matrix.png"
+    confusion_matrix_img = output_model_path / "confusion_matrix1.png"
     plt.savefig(confusion_matrix_img)
     logger.info(f"Confusion Matrix saved -> {confusion_matrix_img}")
 
