@@ -85,3 +85,5 @@ if len(files_non_ingested) > 0:
         logger.info(f"Calling API endpoints")
         call_api_endpoint(url="http://127.0.0.1:8000")
         logger.info(f"Re-deployment complete!")
+else:
+    logger.info("No new data added!")
