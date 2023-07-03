@@ -1,0 +1,2 @@
+# 10 * * * * source /mldevops/mldevops-dynamic-risk-assessment/venv/bin/activate && python3 /mldevops/mldevops-dynamic-risk-assessment/fullprocess.py
+10 * * * * source /home/workspace/venv/bin/activate && python3 /home/workspace/fullprocess.py

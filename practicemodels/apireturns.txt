@@ -1,0 +1,24 @@
+
+predictions status_code-> 200
+predictions -> [0 1 1 0 1]
+
+scoring status_code-> 200
+F1 score is -> 0.5454545454545455
+
+summarystats status_code-> 200
+Means, medians and standard deviations -> [5625.923076923077, 763.5384615384615, 457.46153846153845, 0.5, 425.0, 97.5, 99.0, 0.5, 19444.774621317832, 2016.6093569309696, 800.6048328991891, 0.5099019513592785]
+
+diagnostics status_code-> 200
+{
+  "execution_time": [
+    0.45259994700001016, 
+    1.1308013390000156
+  ], 
+  "missing_data": [
+    0.0, 
+    0.0, 
+    0.0, 
+    0.0, 
+    0.0
+  ]
+}

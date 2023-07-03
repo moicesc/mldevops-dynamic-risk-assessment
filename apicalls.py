@@ -44,7 +44,7 @@ def call_api_endpoint(url: str = URL):
                 f"\ndiagnostics status_code-> {response4.status_code}\n" \
                 f"{response4.content.decode('utf-8')}"
 
-    api_returns = output_model_path / "apireturns1.txt"
+    api_returns = output_model_path / "apireturns.txt"
     with open(api_returns, "w") as txt:
         txt.write(responses)
     logger.info(f"API responses saved to -> {api_returns}")

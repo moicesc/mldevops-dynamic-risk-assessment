@@ -29,11 +29,12 @@ model_file = model_path / "trainedmodel.pkl"
 test_data_file = test_data_path / "testdata.csv"
 
 
-def score_model(model: Path = model_file) -> float:
+def score_model(model: Path = model_file, save_file: bool = True) -> float:
     """
     Function to calculate the F1 score of a defined model
 
     Args:
+        save_file: boolean to save the score to a file
         model: Path to the model to get the score
 
     Returns:
@@ -57,10 +58,11 @@ def score_model(model: Path = model_file) -> float:
 
     f1_score = metrics.f1_score(y_true=y, y_pred=preds)
     logger.info(f"F1 score -> {f1_score}")
-    f1_score_txt = model_path / "latestscore.txt"
-    with open(f1_score_txt, "w") as txt:
-        txt.write(str(f1_score))
-    logger.info(f"F1 score file -> {f1_score_txt}")
+    if save_file:
+        f1_score_txt = model_path / "latestscore.txt"
+        with open(f1_score_txt, "w") as txt:
+            txt.write(str(f1_score))
+        logger.info(f"F1 score file -> {f1_score_txt}")
 
     return f1_score
 

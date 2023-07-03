@@ -43,15 +43,15 @@ def merge_multiple_dataframe() -> None:
     for file in files:
         temp = pd.read_csv(file)
         merged_data = pd.concat([merged_data, temp], axis=0)
-        ingested_files.append(str(file))
+        ingested_files.append(str(file.stem))
 
     merged_data.drop_duplicates(inplace=True)
     merged_data_csv = output_files_path / "finaldata.csv"
     merged_data.to_csv(merged_data_csv, index=False)
-    ingested_files_txt = output_files_path / f"{today}_ingestedfiles.txt"
+    ingested_files_txt = output_files_path / f"ingestedfiles.txt"
 
-    with open(ingested_files_txt, "w") as txt:
-        txt.write(str(ingested_files))
+    with open(ingested_files_txt, "a") as txt:
+        txt.write(", " + str(ingested_files)[1:-1])
     logger.info(f"Final data file saved -> {merged_data_csv}")
     logger.info(f"Ingested files recorded in -> {ingested_files_txt}")
 
